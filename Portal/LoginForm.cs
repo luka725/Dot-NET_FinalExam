@@ -38,6 +38,12 @@ namespace Portal
                     StudentForm studentForm = new StudentForm(authenticationResult);
                     studentForm.Show();
                 }
+                else if (role == "Lecturer")
+                {
+                    Hide();
+                    LecturerForm lecturerForm = new LecturerForm(authenticationResult);
+                    lecturerForm.Show();
+                }
                 else
                 {
                     MessageBox.Show("Invalid user role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

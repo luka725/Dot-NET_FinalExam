@@ -73,6 +73,15 @@ namespace Portal.Classes
 
             return enrolledSubjects;
         }
+        public List<Subject> GetEnrolledSubjectsForLecturer(int lecturerId)
+        {
+            var enrolledSubjects = dbContext.Set<Enrollment>()
+                .Where(e => e.UserId == lecturerId && e.IsLecturer)
+                .Select(e => e.Subject)
+                .ToList();
+
+            return enrolledSubjects;
+        }
         public List<Lesson> GetLessonsForSubject(int subjectId)
         {
             var lessons = dbContext.Set<Lesson>()
@@ -88,6 +97,50 @@ namespace Portal.Classes
                 .ToList();
 
             return grades;
+        }
+        public List<User> GetEnrolledUsersForSubject(int subjectId)
+        {
+            var enrolledUsers = dbContext.Set<Enrollment>()
+                .Where(e => e.SubjectId == subjectId && !e.IsLecturer)
+                .Select(e => e.User)
+                .ToList();
+
+            return enrolledUsers;
+        }
+        public List<Grade> GetGradesForUsersAndLessons(List<int> userIds, List<int> lessonIds)
+        {
+            var grades = dbContext.Set<Grade>()
+                .Where(g => userIds.Contains(g.UserId) && lessonIds.Contains(g.LessonId))
+                .ToList();
+
+            return grades;
+        }
+        public void UpdateOrCreateGrade(int userId, int lessonId, string gradeValue)
+        {
+            var existingGrade = dbContext.Set<Grade>()
+                .FirstOrDefault(g => g.UserId == userId && g.LessonId == lessonId);
+
+            if (existingGrade != null)
+            {
+                // Update the existing grade
+                existingGrade.GradeValue = gradeValue;
+            }
+            else
+            {
+                // Create a new grade
+                var newGrade = new Grade
+                {
+                    UserId = userId,
+                    LessonId = lessonId,
+                    GradeValue = gradeValue
+                };
+
+                dbContext.Set<Grade>().Add(newGrade);
+            }
+        }
+        public void SaveChanges()
+        {
+            dbContext.SaveChanges();
         }
     }
 }

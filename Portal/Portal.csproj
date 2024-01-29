@@ -64,6 +64,12 @@
     <Compile Include="Classes\DatabaseHelper.cs" />
     <Compile Include="Classes\Methods.cs" />
     <Compile Include="Classes\UserAuthenticationResult .cs" />
+    <Compile Include="LecturerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LecturerForm.Designer.cs">
+      <DependentUpon>LecturerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="StudentForm.Designer.cs">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="LecturerForm.resx">
+      <DependentUpon>LecturerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
