@@ -26,7 +26,6 @@ namespace Portal.Classes
             {
                 if (instance == null)
                 {
-                    // Assuming you have a PortalDbContext class
                     instance = new DatabaseHelper(new PortalDbContext());
                 }
                 return instance;
@@ -38,15 +37,57 @@ namespace Portal.Classes
             return dbContext.Set<User>().SingleOrDefault(u => u.Email == email);
         }
 
-        public bool AuthenticateUser(string email, string hashedPassword)
+        public string GetUserRole(int roleId)
+        {
+            var role = dbContext.Set<Role>().Find(roleId);
+
+            return role?.RoleName;
+        }
+
+        public UserAuthenticationResult AuthenticateUser(string email, string hashedPassword)
         {
             var user = GetUserByEmail(email);
 
             if (user != null && hashedPassword == user.PasswordHash)
             {
-                return true;
+                var userRole = GetUserRole(user.RoleId);
+
+                return new UserAuthenticationResult
+                {
+                    IsAuthenticated = true,
+                    FirstName = user.Name,
+                    LastName = user.LastName,
+                    Role = userRole,
+                    Id = user.UserId
+                };
             }
-            return false;
+
+            return new UserAuthenticationResult { IsAuthenticated = false };
+        }
+        public List<Subject> GetEnrolledSubjectsForStudent(int studentId)
+        {
+            var enrolledSubjects = dbContext.Set<Enrollment>()
+                .Where(e => e.UserId == studentId && !e.IsLecturer)
+                .Select(e => e.Subject)
+                .ToList();
+
+            return enrolledSubjects;
+        }
+        public List<Lesson> GetLessonsForSubject(int subjectId)
+        {
+            var lessons = dbContext.Set<Lesson>()
+                .Where(l => l.SubjectId == subjectId)
+                .ToList();
+
+            return lessons;
+        }
+        public List<Grade> GetGradesForUserAndLessons(int userId, List<int> lessonIds)
+        {
+            var grades = dbContext.Set<Grade>()
+                .Where(g => g.UserId == userId && lessonIds.Contains(g.LessonId))
+                .ToList();
+
+            return grades;
         }
     }
 }

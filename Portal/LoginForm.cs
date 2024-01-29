@@ -24,18 +24,27 @@ namespace Portal
         {
             string userEmail = emailTextBox.Text;
             string hashedPassword = Methods.HashPassword(passwordTextBox.Text);
-            bool isAuthenticated = DatabaseHelper.Instance.AuthenticateUser(userEmail, hashedPassword);
+            UserAuthenticationResult authenticationResult = DatabaseHelper.Instance.AuthenticateUser(userEmail, hashedPassword);
 
-            if (isAuthenticated)
+            if (authenticationResult.IsAuthenticated)
             {
-                // User is authenticated, get the user's role
-
-                // Display the user's role or perform any other actions
-                MessageBox.Show($"Login successful!");
+                string firstName = authenticationResult.FirstName;
+                string lastName = authenticationResult.LastName;
+                string role = authenticationResult.Role;
+                MessageBox.Show($"Login successful for {role} {firstName} {lastName}!");
+                if(role == "Student")
+                {
+                    Hide();
+                    StudentForm studentForm = new StudentForm(authenticationResult);
+                    studentForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Invalid user role", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                // Authentication failed
                 MessageBox.Show("Login failed. Invalid email or password.");
             }
         }

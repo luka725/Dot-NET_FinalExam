@@ -64,8 +64,8 @@
                 .RuleFor(u => u.Email, f => f.Person.Email)
                 .RuleFor(u => u.PasswordHash, f => Methods.HashPassword("password"))
                 .RuleFor(u => u.BirthDate, f => f.Person.DateOfBirth)
-                .RuleFor(u => u.PersonalID, f => f.Random.AlphaNumeric(10))
-                .RuleFor(u => u.RoleId, (f, u) => context.Roles.OrderBy(r => Guid.NewGuid()).First().RoleId);
+                .RuleFor(u => u.PersonalID, f => f.Random.AlphaNumeric(11))
+                .RuleFor(u => u.RoleId, context.Roles.First(r => r.RoleName == "Student").RoleId);
 
             var administrator = new User
             {
@@ -105,6 +105,7 @@
             var studentRoleName = "Student";
 
             var subjects = context.Subjects.ToList();
+
             var lecturers = context.Users
                 .Where(u => u.Role.RoleName == lecturerRoleName)
                 .Take(subjects.Count)
@@ -112,7 +113,6 @@
 
             var students = context.Users
                 .Where(u => u.Role.RoleName == studentRoleName)
-                .Take(subjects.Count * 20)
                 .ToList();
 
             var enrollments = new List<Enrollment>();
@@ -132,19 +132,27 @@
                 enrollments.Add(enrollment);
             }
 
-            // Assign 20 students to each subject
             foreach (var student in students)
             {
-                var randomSubject = subjects.OrderBy(s => Guid.NewGuid()).First();
-                var enrollment = new Enrollment
-                {
-                    SubjectId = randomSubject.SubjectId,
-                    UserId = student.UserId,
-                    IsLecturer = false
-                };
+                // Shuffle the subjects to randomly select them
+                var shuffledSubjects = subjects.OrderBy(s => Guid.NewGuid()).ToList();
 
-                enrollments.Add(enrollment);
+                // Take at least 5 subjects
+                var selectedSubjects = shuffledSubjects.Take(5).ToList();
+
+                foreach (var subject in selectedSubjects)
+                {
+                    var enrollment = new Enrollment
+                    {
+                        SubjectId = subject.SubjectId,
+                        UserId = student.UserId,
+                        IsLecturer = false
+                    };
+
+                    enrollments.Add(enrollment);
+                }
             }
+
 
             context.Enrollments.AddRange(enrollments);
             await context.SaveChangesAsync();
@@ -173,6 +181,7 @@
         }
         private async Task SeedGradesAsync(PortalDbContext context)
         {
+            var random = new Random();
             var enrollments = await context.Enrollments
              .Include(e => e.Subject)
              .Include(e => e.User)
@@ -192,7 +201,7 @@
                     {
                         LessonId = lesson.LessonId,
                         UserId = enrollment.UserId,
-                        GradeValue = GenerateRandomGrade()
+                        GradeValue = random.Next(0, 20).ToString()
                     };
 
                     grades.Add(grade);
@@ -202,11 +211,5 @@
             context.Grades.AddRange(grades);
             await context.SaveChangesAsync();
         }   
-        private string GenerateRandomGrade()
-        {
-            // Generate a random grade value between 0 and 8
-            var random = new Random();
-            return random.Next(0, 8).ToString();
-        }
     }
 }
