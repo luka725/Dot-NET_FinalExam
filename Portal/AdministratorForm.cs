@@ -72,7 +72,7 @@ namespace Portal
                     OpenEnrollmentForm();
                     break;
                 case SubjectEntityType:
-                    //OpenSubjectForm();
+                    OpenSubjectForm();
                     break;
                 default:
                     break;
@@ -87,6 +87,11 @@ namespace Portal
         { 
             AdminEnrollmentsForm enrollmentsForm = new AdminEnrollmentsForm();
             enrollmentsForm.Show();
+        }
+        private void OpenSubjectForm()
+        {
+           AdminSubjectsForm subjectForm = new AdminSubjectsForm();
+           subjectForm.Show();
         }
     }
 }

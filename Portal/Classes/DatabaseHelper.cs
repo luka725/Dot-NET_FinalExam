@@ -126,14 +126,6 @@ namespace Portal.Classes
 
             return enrolledSubjects;
         }
-        public List<Lesson> GetLessonsForSubject(int subjectId)
-        {
-            var lessons = dbContext.Set<Lesson>()
-                .Where(l => l.SubjectId == subjectId)
-                .ToList();
-
-            return lessons;
-        }
         public List<Grade> GetGradesForUserAndLessons(int userId, List<int> lessonIds)
         {
             var grades = dbContext.Set<Grade>()
@@ -351,6 +343,96 @@ namespace Portal.Classes
             if (userToDelete != null)
             {
                 dbContext.Set<User>().Remove(userToDelete);
+                SaveChanges();
+            }
+        }
+        public void AddSubjectWithDefaultLessons(string subjectName)
+        {
+            var existingSubject = dbContext.Set<Subject>().SingleOrDefault(s => s.SubjectName == subjectName);
+
+            if (existingSubject != null)
+            {
+                // Subject with the same name already exists
+                throw new InvalidOperationException("Subject with the same name already exists.");
+            }
+
+            // Create a new subject
+            var newSubject = new Subject
+            {
+                SubjectName = subjectName
+            };
+
+            // Add the subject to the context
+            dbContext.Set<Subject>().Add(newSubject);
+
+            // Save changes to get the SubjectId
+            SaveChanges();
+
+            // Add default lessons for the subject
+            for (int i = 1; i <= 14; i++)
+            {
+                var newLesson = new Lesson
+                {
+                    LessonName = $"Week {i}",
+                    SubjectId = newSubject.SubjectId
+                };
+
+                // Add the lesson to the context
+                dbContext.Set<Lesson>().Add(newLesson);
+            }
+
+            // Save changes to add default lessons
+            SaveChanges();
+        }
+        public List<Subject> GetAllSubjects()
+        {
+            return dbContext.Set<Subject>().ToList();
+        }
+        public List<Lesson> GetLessonsForSubject(int subjectId)
+        {
+            return dbContext.Set<Lesson>().Where(lesson => lesson.SubjectId == subjectId).ToList();
+        }
+        public void UpdateLessonNames(List<Lesson> lessons)
+        {
+            foreach (var lesson in lessons)
+            {
+                // Find the lesson in the database
+                var existingLesson = dbContext.Set<Lesson>().Find(lesson.LessonId);
+
+                if (existingLesson != null)
+                {
+                    // Update the lesson name
+                    existingLesson.LessonName = lesson.LessonName;
+
+                    // Mark the lesson as modified
+                    dbContext.Entry(existingLesson).State = EntityState.Modified;
+                }
+            }
+
+            SaveChanges();
+        }
+        public void UpdateLessonName(Lesson updatedLesson)
+        {
+            var existingLesson = dbContext.Set<Lesson>().Find(updatedLesson.LessonId);
+
+            if (existingLesson != null)
+            {
+                existingLesson.LessonName = updatedLesson.LessonName;
+                dbContext.SaveChanges();
+            }
+            else
+            {
+                // Handle the case where the lesson with the given LessonId is not found
+                throw new Exception($"Lesson with LessonId {updatedLesson.LessonId} not found.");
+            }
+        }
+        public void DeleteSubject(int subjectId)
+        {
+            Subject subjectToDelete = dbContext.Set<Subject>().Find(subjectId);
+
+            if (subjectToDelete != null)
+            {
+                dbContext.Set<Subject>().Remove(subjectToDelete);
                 SaveChanges();
             }
         }

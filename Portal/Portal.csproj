@@ -73,6 +73,12 @@
     <Compile Include="AdministratorForm.Designer.cs">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AdminSubjectsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminSubjectsForm.Designer.cs">
+      <DependentUpon>AdminSubjectsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminUsersForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdministratorForm.resx">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminSubjectsForm.resx">
+      <DependentUpon>AdminSubjectsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminUsersForm.resx">
       <DependentUpon>AdminUsersForm.cs</DependentUpon>

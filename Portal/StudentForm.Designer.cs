@@ -78,7 +78,7 @@
             this.dgvGrades.ShowCellToolTips = false;
             this.dgvGrades.ShowEditingIcon = false;
             this.dgvGrades.ShowRowErrors = false;
-            this.dgvGrades.Size = new System.Drawing.Size(787, 100);
+            this.dgvGrades.Size = new System.Drawing.Size(787, 76);
             this.dgvGrades.TabIndex = 3;
             // 
             // StudentForm
