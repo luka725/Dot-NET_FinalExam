@@ -61,11 +61,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminEnrollmentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminEnrollmentsForm.Designer.cs">
+      <DependentUpon>AdminEnrollmentsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdministratorForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AdministratorForm.Designer.cs">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminStudentForm.Designer.cs">
+      <DependentUpon>AdminStudentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\DatabaseHelper.cs" />
     <Compile Include="Classes\Methods.cs" />
@@ -102,8 +114,20 @@
     <Compile Include="StudentForm.Designer.cs">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UpdateStudentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateStudentForm.Designer.cs">
+      <DependentUpon>UpdateStudentForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AdminEnrollmentsForm.resx">
+      <DependentUpon>AdminEnrollmentsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdministratorForm.resx">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminStudentForm.resx">
+      <DependentUpon>AdminStudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LecturerForm.resx">
       <DependentUpon>LecturerForm.cs</DependentUpon>
@@ -125,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="StudentForm.resx">
       <DependentUpon>StudentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateStudentForm.resx">
+      <DependentUpon>UpdateStudentForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -21,5 +21,6 @@ namespace Portal.Models
 
         public ICollection<Enrollment> Enrollments { get; set; }
         public ICollection<Grade> Grades { get; set; }
+        public string FullName => $"{Name} {LastName}";
     }
 }

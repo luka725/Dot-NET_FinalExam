@@ -22,8 +22,8 @@ namespace Portal
 
         private void logInButton_Click(object sender, EventArgs e)
         {
-            string userEmail = passwordTextBox.Text;
-            string hashedPassword = Methods.HashPassword(emailTextBox.Text);
+            string userEmail = emailTextBox.Text;
+            string hashedPassword = Methods.HashPassword(passwordTextBox.Text);
             UserAuthenticationResult authenticationResult = DatabaseHelper.Instance.AuthenticateUser(userEmail, hashedPassword);
 
             if (authenticationResult.IsAuthenticated)
@@ -47,7 +47,7 @@ namespace Portal
                 else if (role == "Administrator")
                 {
                     Hide();
-                    AdministratorForm administratorForm = new AdministratorForm();
+                    AdministratorForm administratorForm = new AdministratorForm(authenticationResult);
                     administratorForm.Show();
                 }
                 else
