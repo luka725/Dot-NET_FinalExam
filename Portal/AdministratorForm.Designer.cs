@@ -70,7 +70,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AdministratorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AdministratorForm";
+            this.Text = "Administrator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdministratorForm_FormClosing);
             this.Load += new System.EventHandler(this.AdministratorForm_Load);
             this.ResumeLayout(false);

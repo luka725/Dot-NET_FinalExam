@@ -1,6 +1,6 @@
 ﻿namespace Portal
 {
-    partial class UpdateStudentForm
+    partial class UpdateUserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -158,7 +158,7 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "BirthDate:";
             // 
-            // updateStudentForm
+            // UpdateUserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -177,8 +177,9 @@
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.txtLastName);
             this.Controls.Add(this.txtName);
-            this.Name = "updateStudentForm";
-            this.Text = "updateStudentForm";
+            this.Name = "UpdateUserForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Update User";
             this.ResumeLayout(false);
             this.PerformLayout();
 

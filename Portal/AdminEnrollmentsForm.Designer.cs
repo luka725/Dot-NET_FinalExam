@@ -163,7 +163,8 @@
             this.Controls.Add(this.radioLecturer);
             this.Controls.Add(this.radioStudent);
             this.Name = "AdminEnrollmentsForm";
-            this.Text = "AdminEnrollments";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Enrollments";
             this.ResumeLayout(false);
             this.PerformLayout();
 

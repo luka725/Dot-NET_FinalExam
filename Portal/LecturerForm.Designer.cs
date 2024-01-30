@@ -91,7 +91,8 @@
             this.Controls.Add(this.cmbSubjects);
             this.Controls.Add(this.label1);
             this.Name = "LecturerForm";
-            this.Text = "LecturerForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Lecturer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LecturerForm_FormClosing);
             this.Load += new System.EventHandler(this.LecturerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubject)).EndInit();

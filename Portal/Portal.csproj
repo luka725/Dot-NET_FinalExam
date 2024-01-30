@@ -73,11 +73,11 @@
     <Compile Include="AdministratorForm.Designer.cs">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminStudentForm.cs">
+    <Compile Include="AdminUsersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminStudentForm.Designer.cs">
-      <DependentUpon>AdminStudentForm.cs</DependentUpon>
+    <Compile Include="AdminUsersForm.Designer.cs">
+      <DependentUpon>AdminUsersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\DatabaseHelper.cs" />
     <Compile Include="Classes\Methods.cs" />
@@ -114,11 +114,11 @@
     <Compile Include="StudentForm.Designer.cs">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateStudentForm.cs">
+    <Compile Include="UpdateUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateStudentForm.Designer.cs">
-      <DependentUpon>UpdateStudentForm.cs</DependentUpon>
+    <Compile Include="UpdateUserForm.Designer.cs">
+      <DependentUpon>UpdateUserForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AdminEnrollmentsForm.resx">
       <DependentUpon>AdminEnrollmentsForm.cs</DependentUpon>
@@ -126,8 +126,8 @@
     <EmbeddedResource Include="AdministratorForm.resx">
       <DependentUpon>AdministratorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminStudentForm.resx">
-      <DependentUpon>AdminStudentForm.cs</DependentUpon>
+    <EmbeddedResource Include="AdminUsersForm.resx">
+      <DependentUpon>AdminUsersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LecturerForm.resx">
       <DependentUpon>LecturerForm.cs</DependentUpon>
@@ -150,8 +150,8 @@
     <EmbeddedResource Include="StudentForm.resx">
       <DependentUpon>StudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateStudentForm.resx">
-      <DependentUpon>UpdateStudentForm.cs</DependentUpon>
+    <EmbeddedResource Include="UpdateUserForm.resx">
+      <DependentUpon>UpdateUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

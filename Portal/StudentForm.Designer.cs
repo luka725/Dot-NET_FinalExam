@@ -78,7 +78,7 @@
             this.dgvGrades.ShowCellToolTips = false;
             this.dgvGrades.ShowEditingIcon = false;
             this.dgvGrades.ShowRowErrors = false;
-            this.dgvGrades.Size = new System.Drawing.Size(787, 137);
+            this.dgvGrades.Size = new System.Drawing.Size(787, 100);
             this.dgvGrades.TabIndex = 3;
             // 
             // StudentForm
@@ -92,7 +92,7 @@
             this.Controls.Add(this.label1);
             this.Name = "StudentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "StudentForm";
+            this.Text = "Student";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StudentForm_FormClosing);
             this.Load += new System.EventHandler(this.StudentForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrades)).EndInit();

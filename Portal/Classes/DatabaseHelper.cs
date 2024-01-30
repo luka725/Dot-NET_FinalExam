@@ -33,11 +33,25 @@ namespace Portal.Classes
         {
             return dbContext.Set<User>().SingleOrDefault(u => u.Email == email);
         }
+        public User GetUserById(int userId)
+        {
+            return dbContext.Set<User>().SingleOrDefault(u => u.UserId == userId);
+        }
         public string GetUserRole(int roleId)
         {
             var role = dbContext.Set<Role>().Find(roleId);
 
             return role?.RoleName;
+        }
+        public List<User> GetUsersByRoleId(int roleId)
+        {
+            var users = dbContext.Set<User>().Where(u => u.RoleId == roleId).ToList();
+
+            return users;
+        }
+        public List<Role> GetAllRoles()
+        {
+            return dbContext.Set<Role>().ToList();
         }
         public UserAuthenticationResult AuthenticateUser(string email, string hashedPassword)
         {
@@ -307,6 +321,36 @@ namespace Portal.Classes
                 dbContext.Set<Enrollment>().Remove(enrollment);
 
                 // Save changes to the database
+                SaveChanges();
+            }
+        }
+        public void AddUser(string name, string lastName, string email, string password, DateTime birthDate, string personalId, int roleId)
+        {
+            // Create a new user instance
+            var newUser = new User
+            {
+                Name = name,
+                LastName = lastName,
+                Email = email,
+                PasswordHash = Methods.HashPassword(password),
+                BirthDate = birthDate,
+                PersonalID = personalId,
+                RoleId = roleId
+            };
+
+            // Add the new user to the context
+            dbContext.Set<User>().Add(newUser);
+
+            // Save changes to the database
+            SaveChanges();
+        }
+        public void DeleteUser(int userId)
+        {
+            var userToDelete = dbContext.Set<User>().Find(userId);
+
+            if (userToDelete != null)
+            {
+                dbContext.Set<User>().Remove(userToDelete);
                 SaveChanges();
             }
         }

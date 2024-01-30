@@ -15,8 +15,7 @@ namespace Portal
     public partial class AdministratorForm : Form
     {
         public UserAuthenticationResult data;
-        private const string StudentEntityType = "Student";
-        private const string LecturerEntityType = "Lecturer";
+        private const string UserEntityType = "User";
         private const string SubjectEntityType = "Subject";
         private const string EnrollmentEntityType = "Enrollment";
         public AdministratorForm(UserAuthenticationResult data)
@@ -28,7 +27,7 @@ namespace Portal
         private void AdministratorForm_Load(object sender, EventArgs e)
         {
             label1.Text = $"Welcome {data.FirstName} {data.LastName}";
-            cmbEntityType.Items.AddRange(new string[] { "Student", "Lecturer", "Subject", "Enrollment" });
+            cmbEntityType.Items.AddRange(new string[] { "User", "Subject", "Enrollment" });
 
             // Set the default selection
             cmbEntityType.SelectedIndex = 0; // Select "Student" by default
@@ -48,9 +47,7 @@ namespace Portal
 
             switch (selectedEntityType)
             {
-                case "Student":
-                    break;
-                case "Lecturer":
+                case "User":
                     break;
                 case "Subject":
                     break;
@@ -68,14 +65,11 @@ namespace Portal
             // Open the corresponding form based on the selected entity type
             switch (selectedEntityType)
             {
-                case StudentEntityType:
+                case UserEntityType:
                     OpenStudentForm();
                     break;
                 case EnrollmentEntityType:
                     OpenEnrollmentForm();
-                    break;
-                case LecturerEntityType:
-                    //OpenLecturerForm();
                     break;
                 case SubjectEntityType:
                     //OpenSubjectForm();
@@ -86,7 +80,7 @@ namespace Portal
         }
         private void OpenStudentForm()
         {
-            AdminStudentForm studentForm = new AdminStudentForm();
+            AdminUsersForm studentForm = new AdminUsersForm();
             studentForm.Show();
         }
         private void OpenEnrollmentForm() 
