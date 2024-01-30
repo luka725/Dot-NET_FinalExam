@@ -32,6 +32,7 @@
             this.cmbSubjects = new System.Windows.Forms.ComboBox();
             this.getGradesBtn = new System.Windows.Forms.Button();
             this.dgvGrades = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,11 +82,21 @@
             this.dgvGrades.Size = new System.Drawing.Size(787, 76);
             this.dgvGrades.TabIndex = 3;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 35);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(318, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "From The Dropdown Choose Your Subject And Click View Grades";
+            // 
             // StudentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvGrades);
             this.Controls.Add(this.getGradesBtn);
             this.Controls.Add(this.cmbSubjects);
@@ -107,5 +118,6 @@
         private System.Windows.Forms.ComboBox cmbSubjects;
         private System.Windows.Forms.Button getGradesBtn;
         protected System.Windows.Forms.DataGridView dgvGrades;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbEntityType = new System.Windows.Forms.ComboBox();
             this.selectBtn = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -44,7 +45,7 @@
             // cmbEntityType
             // 
             this.cmbEntityType.FormattingEnabled = true;
-            this.cmbEntityType.Location = new System.Drawing.Point(15, 61);
+            this.cmbEntityType.Location = new System.Drawing.Point(12, 74);
             this.cmbEntityType.Name = "cmbEntityType";
             this.cmbEntityType.Size = new System.Drawing.Size(121, 21);
             this.cmbEntityType.TabIndex = 1;
@@ -52,7 +53,7 @@
             // 
             // selectBtn
             // 
-            this.selectBtn.Location = new System.Drawing.Point(142, 61);
+            this.selectBtn.Location = new System.Drawing.Point(139, 72);
             this.selectBtn.Name = "selectBtn";
             this.selectBtn.Size = new System.Drawing.Size(75, 23);
             this.selectBtn.TabIndex = 2;
@@ -60,11 +61,21 @@
             this.selectBtn.UseVisualStyleBackColor = true;
             this.selectBtn.Click += new System.EventHandler(this.selectBtn_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(9, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(299, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "From The Dropdown Choose Which Task You Want to Done.";
+            // 
             // AdministratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.selectBtn);
             this.Controls.Add(this.cmbEntityType);
             this.Controls.Add(this.label1);
@@ -83,5 +94,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbEntityType;
         private System.Windows.Forms.Button selectBtn;
+        private System.Windows.Forms.Label label2;
     }
 }
