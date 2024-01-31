@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -435,6 +436,49 @@ namespace Portal.Classes
                 dbContext.Set<Subject>().Remove(subjectToDelete);
                 SaveChanges();
             }
+        }
+        public List<int> GetAllSubjectIds()
+        {
+            // Retrieve all subject IDs from the Subjects table
+            List<int> subjectIds = dbContext.Set<Subject>().Select(s => s.SubjectId).ToList();
+
+            return subjectIds;
+        }
+        public List<User> GetStudentsEnrolledInSubject(int subjectId)
+        {
+            List<User> enrolledStudents = new List<User>();
+
+                    enrolledStudents = dbContext.Set<Enrollment>()
+                        .Where(enrollment => enrollment.SubjectId == subjectId && !enrollment.IsLecturer)
+                        .Select(enrollment => enrollment.User)
+                        .ToList();
+
+            return enrolledStudents;
+        }
+        public List<User> GetEnrolledLecturersForSubject(int subjectId)
+        {
+            var enrolledLecturers = dbContext.Set<Enrollment>()
+                .Where(enrollment => enrollment.SubjectId == subjectId && enrollment.IsLecturer)
+                .Select(enrollment => enrollment.User)
+                .ToList();
+
+            return enrolledLecturers;
+        }
+        public List<Lesson> GetLessonsBySubjectId(int subjectId)
+        {
+            List<Lesson> lessons = dbContext.Set<Lesson>()
+                .Where(lesson => lesson.SubjectId == subjectId)
+                .ToList();
+
+            return lessons;
+        }
+        public List<Grade> GetGradesByLessonAndUserId(int lessonId, int userId)
+        {
+            List<Grade> grades = dbContext.Set<Grade>()
+                .Where(grade => grade.LessonId == lessonId && grade.UserId == userId)
+                .ToList();
+
+            return grades;
         }
         public void SaveChanges()
         {

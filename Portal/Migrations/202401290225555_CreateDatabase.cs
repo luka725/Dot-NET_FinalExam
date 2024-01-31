@@ -83,7 +83,30 @@
                         RoleName = c.String(),
                     })
                 .PrimaryKey(t => t.RoleId);
-            
+
+            // Create stored procedure for GetLecturerSubjects
+            Sql(@"CREATE PROCEDURE GetLecturerSubjects
+                AS
+                BEGIN
+                    SELECT s.SubjectId, s.SubjectName, CONCAT(u.Name, ' ', u.LastName) AS LecturerFullName
+                    FROM Subjects s
+                    INNER JOIN Enrollments e ON s.SubjectId = e.SubjectId
+                    INNER JOIN Users u ON e.UserId = u.UserId
+                    WHERE e.IsLecturer = 1;
+                END;"
+            );
+            // Create stored procedure for GetStudentsEnrolledInSubject
+            Sql(@"CREATE PROCEDURE GetStudentsEnrolledInSubject
+                @SubjectId INT
+                AS
+                BEGIN
+                    SELECT Users.UserId, CONCAT(Users.Name, ' ', Users.LastName) AS FullName
+                    FROM Enrollments
+                    JOIN Users ON Enrollments.UserId = Users.UserId
+                    WHERE Enrollments.SubjectId = @SubjectId AND Enrollments.IsLecturer = 0;
+                END;"
+            );
+
         }
         
         public override void Down()
