@@ -240,5 +240,23 @@ namespace Portal
             }
             PopulateGridSingular();
         }
+        private void callReportBtn_Click(object sender, EventArgs e)
+        {
+            ReportViewerForm reportViewerForm = new ReportViewerForm();
+            reportViewerForm.Show();
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            PopulateCmbSubjects();
+            Subject selectedSubject = cmbSubjects.SelectedItem as Subject;
+
+            if (selectedSubject != null)
+            {
+
+                PopulateCmbStudents(selectedSubject.SubjectId);
+
+            }
+        }
     }
 }

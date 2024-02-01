@@ -107,6 +107,44 @@
                 END;"
             );
 
+            Sql(@"CREATE PROCEDURE GetSubjectAverages
+                AS
+                BEGIN
+                    SELECT
+                        s.SubjectName,
+                        AVG(CAST(g.GradeValue AS FLOAT)) AS AverageGrade
+                    FROM
+                        Subjects s
+                    JOIN
+                        Lessons l ON s.SubjectId = l.SubjectId
+                    JOIN
+                        Grades g ON l.LessonId = g.LessonId
+                    GROUP BY
+                        s.SubjectName;
+                END;"
+            );
+
+            Sql(@"CREATE PROCEDURE GetSubjectUserGradeSummary
+                AS
+                BEGIN
+                    SELECT
+                        s.SubjectName,
+                        u.Name + ' ' + u.LastName AS StudentName,
+                        ISNULL(SUM(CAST(g.GradeValue AS INT)), 0) AS TotalGrades
+                    FROM
+                        Subjects s
+                        INNER JOIN Enrollments e ON s.SubjectId = e.SubjectId
+                        INNER JOIN Users u ON e.UserId = u.UserId
+                        LEFT JOIN Lessons l ON s.SubjectId = l.SubjectId
+                        LEFT JOIN Grades g ON l.LessonId = g.LessonId AND u.UserId = g.UserId
+                    WHERE
+                        e.IsLecturer = 0 -- To filter only students
+                    GROUP BY
+                        s.SubjectName,
+                        u.Name,
+                        u.LastName;
+                END;"
+            );
         }
         
         public override void Down()

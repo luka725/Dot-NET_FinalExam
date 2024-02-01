@@ -1,5 +1,6 @@
 ﻿using Portal.Models;
 using System;
+using Portal.Classes;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -319,23 +320,31 @@ namespace Portal.Classes
         }
         public void AddUser(string name, string lastName, string email, string password, DateTime birthDate, string personalId, int roleId)
         {
-            // Create a new user instance
-            var newUser = new User
+            if (IsEmailUnique(email))
             {
-                Name = name,
-                LastName = lastName,
-                Email = email,
-                PasswordHash = Methods.HashPassword(password),
-                BirthDate = birthDate,
-                PersonalID = personalId,
-                RoleId = roleId
-            };
+                // Create a new user instance
+                var newUser = new User
+                {
+                    Name = name,
+                    LastName = lastName,
+                    Email = email,
+                    PasswordHash = Methods.HashPassword(password),
+                    BirthDate = birthDate,
+                    PersonalID = personalId,
+                    RoleId = roleId
+                };
 
-            // Add the new user to the context
-            dbContext.Set<User>().Add(newUser);
+                // Add the new user to the context
+                dbContext.Set<User>().Add(newUser);
 
-            // Save changes to the database
-            SaveChanges();
+                // Save changes to the database
+                SaveChanges();
+            }
+            else
+            {
+                // Handle the case where the email is not unique (e.g., throw an exception, return an error)
+                throw new InvalidOperationException("Email is already in use.");
+            }
         }
         public void DeleteUser(int userId)
         {
@@ -479,6 +488,30 @@ namespace Portal.Classes
                 .ToList();
 
             return grades;
+        }
+        private bool IsEmailUnique(string email)
+        {
+            // Check if there is any user with the given email in the database
+            return !dbContext.Set<User>().Any(u => u.Email == email);
+        }
+        public List<Grade> GetGradesByLessonId(int lessonId)
+        {
+            // Assuming you have a DbSet<Grade> named "Grades" in your DbContext
+            return dbContext.Set<Grade>()
+                .Where(g => g.LessonId == lessonId)
+                .ToList();
+        }
+        public List<SubjectAverage> GetSubjectAverages()
+        {
+
+               var subjectAverages = dbContext.Database.SqlQuery<SubjectAverage>("GetSubjectAverages").ToList();
+
+            return subjectAverages;
+        }
+        public List<SubjectUserGradesSummary> GetSubjectUserGradeSummary()
+        {
+            var result = dbContext.Database.SqlQuery<SubjectUserGradesSummary>("GetSubjectUserGradeSummary").ToList();
+            return result;
         }
         public void SaveChanges()
         {

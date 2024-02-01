@@ -40,6 +40,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.callReportBtn = new System.Windows.Forms.Button();
+            this.refreshBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudentsSubjects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLecturers)).BeginInit();
             this.SuspendLayout();
@@ -82,9 +84,15 @@
             // 
             // dgvStudentsSubjects
             // 
+            this.dgvStudentsSubjects.AllowUserToAddRows = false;
+            this.dgvStudentsSubjects.AllowUserToDeleteRows = false;
+            this.dgvStudentsSubjects.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.dgvStudentsSubjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudentsSubjects.Location = new System.Drawing.Point(15, 167);
+            this.dgvStudentsSubjects.MultiSelect = false;
             this.dgvStudentsSubjects.Name = "dgvStudentsSubjects";
+            this.dgvStudentsSubjects.ReadOnly = true;
+            this.dgvStudentsSubjects.ShowEditingIcon = false;
             this.dgvStudentsSubjects.Size = new System.Drawing.Size(625, 271);
             this.dgvStudentsSubjects.TabIndex = 4;
             // 
@@ -117,9 +125,14 @@
             // 
             // dgvLecturers
             // 
+            this.dgvLecturers.AllowUserToAddRows = false;
+            this.dgvLecturers.AllowUserToDeleteRows = false;
             this.dgvLecturers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLecturers.Enabled = false;
             this.dgvLecturers.Location = new System.Drawing.Point(646, 167);
+            this.dgvLecturers.MultiSelect = false;
             this.dgvLecturers.Name = "dgvLecturers";
+            this.dgvLecturers.ReadOnly = true;
             this.dgvLecturers.Size = new System.Drawing.Size(142, 144);
             this.dgvLecturers.TabIndex = 8;
             // 
@@ -150,11 +163,33 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Lecturers:";
             // 
+            // callReportBtn
+            // 
+            this.callReportBtn.Location = new System.Drawing.Point(713, 74);
+            this.callReportBtn.Name = "callReportBtn";
+            this.callReportBtn.Size = new System.Drawing.Size(75, 23);
+            this.callReportBtn.TabIndex = 12;
+            this.callReportBtn.Text = "View Report";
+            this.callReportBtn.UseVisualStyleBackColor = true;
+            this.callReportBtn.Click += new System.EventHandler(this.callReportBtn_Click);
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Location = new System.Drawing.Point(383, 138);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshBtn.TabIndex = 13;
+            this.refreshBtn.Text = "Refresh columns";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
             // AdministratorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.refreshBtn);
+            this.Controls.Add(this.callReportBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -193,5 +228,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button callReportBtn;
+        private System.Windows.Forms.Button refreshBtn;
     }
 }
